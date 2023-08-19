@@ -1,0 +1,12 @@
+div.container {
+    display: inline-grid;
+    grid-template-columns: auto auto auto auto auto auto auto auto auto;
+    column-gap: 1rem;
+    margin: 1rem;
+}
+div.control-container {
+    display: inline-grid;
+    grid-template-columns: auto auto;
+    column-gap: 1rem;
+    margin: 1rem;
+}

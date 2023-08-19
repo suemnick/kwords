@@ -1,0 +1,9 @@
+<div class="container">
+    <button mat-raised-button color="primary" *ngFor="let letter of letters; index as i" (click)="letterSelected(i)">{{letter}}</button>
+</div>
+<br>
+<div class="control-container">
+    <button mat-raised-button [disabled]="word === ''" (click)="letterBack()">Back</button>
+    <button mat-raised-button color="accent" (click)="openShuffleDialog()">Shuffle</button>
+</div>
+<app-word></app-word>
