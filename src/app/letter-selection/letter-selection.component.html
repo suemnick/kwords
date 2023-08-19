@@ -1,5 +1,5 @@
 <div class="container">
-    <button mat-raised-button color="primary" *ngFor="let letter of letters; index as i" (click)="letterSelected(i)">{{letter}}</button>
+    <button mat-fab color="primary" *ngFor="let letter of letters; index as i" (click)="letterSelected(i)">{{letter | uppercase }}</button>
 </div>
 <br>
 <div class="control-container">

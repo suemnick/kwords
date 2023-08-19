@@ -14,7 +14,7 @@ export class LettersService {
   constructor() { }
 
   init() {
-    this.availableLetters = [];
+    this.availableLetters = ['_', '_', '_'];
     this.selectedLetters = [];
     const consonants = [...this.consonants];
     this.availableLetters.push(...this.getRandomLetters(consonants, this.CONSONANTS_COUNT));
