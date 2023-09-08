@@ -1,61 +1,48 @@
-import { Component, ViewChild, OnInit } from '@angular/core';
+import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
 import { LettersService } from '../letters.service';
 import { WordComponent } from '../word/word.component';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { Router } from '@angular/router';
+import { SelectableLetter } from '../selectable-letter';
 
 @Component({
   selector: 'app-letter-selection',
   templateUrl: './letter-selection.component.html',
   styleUrls: ['./letter-selection.component.css']
 })
-export class LetterSelectionComponent implements OnInit {
+export class LetterSelectionComponent implements OnInit, AfterViewInit {
   @ViewChild(WordComponent)
   private wordComponent!: WordComponent;
-  word = "";
-  letters: string[] = [];
+  letters: SelectableLetter[] = [];
 
-  constructor(public dialog: MatDialog, private lettersService: LettersService) { }
-
-  openShuffleDialog(): void {
-    const dialogRef = this.dialog.open(ShuffleDialog);
-
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        this.shuffle(true);
-      }
-    });
-  }
+  constructor(
+    private lettersService: LettersService,
+    private router: Router) { }
 
   ngOnInit(): void {
-    this.shuffle(false);
+    this.shuffle();
   }
 
-  letterSelected(letterIndex: number) {
-    const letter = this.lettersService.removeLetter(letterIndex);
-    this.letters = this.lettersService.getLetters();
-    this.word += letter;
-    this.wordComponent.word = this.word;
+  ngAfterViewInit(): void {
+    this.wordComponent.word = this.lettersService.word;
   }
 
-  letterBack() {
-    this.lettersService.backLetter();
-    this.letters = this.lettersService.getLetters();
-    this.word = this.word.slice(0, -1);
-    this.wordComponent.word = this.word;
+  selectLetter(letterIndex: number) {
+    this.letters = this.lettersService.setLetterSelected(letterIndex, true);
+    this.wordComponent.word = this.lettersService.word;
   }
 
-  shuffle(clearWord: boolean) {
-    if (clearWord) {
-      this.word = "";
-      this.wordComponent.word = this.word;
-    }
+  returnLetter() {
+    this.letters = this.lettersService.returnLetter();
+    this.wordComponent.word = this.lettersService.word;
+  }
+
+  shuffle() {
+    this.lettersService.word = "";
     this.lettersService.init();
     this.letters = this.lettersService.getLetters();
   }
-}
 
-@Component({
-  selector: 'shuffle-dialog',
-  templateUrl: './shuffle-dialog.html',
-})
-export class ShuffleDialog {}
+  isWordEmpty(): boolean {
+    return this.lettersService.word === "";
+  }
+}

@@ -7,15 +7,16 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { LetterSelectionComponent, ShuffleDialog } from './letter-selection/letter-selection.component';
+import { LetterSelectionComponent } from './letter-selection/letter-selection.component';
 import { WordComponent } from './word/word.component';
+import { ResultComponent } from './result/result.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LetterSelectionComponent,
     WordComponent,
-    ShuffleDialog,
+    ResultComponent,
   ],
   imports: [
     BrowserModule,

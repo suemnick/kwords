@@ -1,9 +1,14 @@
 <div class="container">
-    <button mat-fab color="primary" *ngFor="let letter of letters; index as i" (click)="letterSelected(i)">{{letter | uppercase }}</button>
+    <button [disabled]="letter.selected" class="letter" mat-fab color="primary"
+        *ngFor="let letter of letters; index as i" (click)="selectLetter(i)">
+        {{letter.letter | uppercase }}
+    </button>
 </div>
 <br>
 <div class="control-container">
-    <button mat-raised-button [disabled]="word === ''" (click)="letterBack()">Back</button>
-    <button mat-raised-button color="accent" (click)="openShuffleDialog()">Shuffle</button>
+    <button mat-raised-button [disabled]="isWordEmpty()" (click)="returnLetter()">Back</button>
 </div>
 <app-word></app-word>
+<p>
+    <button mat-raised-button color="accent" routerLink="/result">Done</button>
+</p>
