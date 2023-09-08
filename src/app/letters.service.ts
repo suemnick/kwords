@@ -7,6 +7,7 @@ import { SelectableLetter } from './selectable-letter';
 export class LettersService {
   readonly CONSONANTS_COUNT = 6;
   readonly VOCALS_COUNT = 3;
+  readonly SPACE_LETTER = '_';
   readonly consonants = 'vvrrpplljjffccttssnnmmhhggbbddkkqqwwxxyyzz'.split('');
   readonly vocals = 'eeeeaaaauuuuooooäöüiii'.split('');
   private availableLetters: SelectableLetter[] = [];
@@ -32,12 +33,25 @@ export class LettersService {
     return this.getLetters();
   }
 
+  addSpaceLetter() {
+    this.word += this.SPACE_LETTER;
+  }
+
+  isLastLetterSpace(): boolean {
+    if (this.word === "") {
+      return false;
+    }
+    return this.word.slice(-1) === this.SPACE_LETTER;
+  }
+
   returnLetter() {
     const lastWordLetter = this.word.slice(-1);
     this.word = this.word.slice(0, -1);
-    const selectableLetter = this.availableLetters.find(letter => letter.letter === lastWordLetter && letter.selected);
-    if (selectableLetter) {
-      selectableLetter.selected = false;
+    if (lastWordLetter !== this.SPACE_LETTER) {
+      const selectableLetter = this.availableLetters.find(letter => letter.letter === lastWordLetter && letter.selected);
+      if (selectableLetter) {
+        selectableLetter.selected = false;
+      }
     }
     return this.getLetters();
   }

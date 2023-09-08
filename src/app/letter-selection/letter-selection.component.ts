@@ -31,6 +31,11 @@ export class LetterSelectionComponent implements OnInit, AfterViewInit {
     this.wordComponent.word = this.lettersService.word;
   }
 
+  selectSpaceLetter() {
+    this.lettersService.addSpaceLetter();
+    this.wordComponent.word = this.lettersService.word;
+  }
+
   returnLetter() {
     this.letters = this.lettersService.returnLetter();
     this.wordComponent.word = this.lettersService.word;
@@ -44,5 +49,19 @@ export class LetterSelectionComponent implements OnInit, AfterViewInit {
 
   isWordEmpty(): boolean {
     return this.lettersService.word === "";
+  }
+
+  isWordInvalid(): boolean {
+    return this.isWordEmpty() || this.lettersService.isLastLetterSpace();
+  }
+
+  spaceLetterSelectable(): boolean {
+    if (this.isWordEmpty()) {
+      return false;
+    }
+    if (this.lettersService.isLastLetterSpace()) {
+      return false;
+    }
+    return true;
   }
 }

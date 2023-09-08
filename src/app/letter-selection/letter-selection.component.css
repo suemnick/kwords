@@ -6,13 +6,30 @@ div.container {
     margin: 1rem;
     justify-content: center;
 }
-div.control-container {
+/* div.control-container {
     display: inline-grid;
     grid-template-columns: auto auto;
     column-gap: 0.25rem;
     margin: 0.25rem;
-}
+} */
 
 button.letter {
     font-size: 2rem;
+}
+div.control-container {
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: auto;
+    justify-content: center;
+    align-content: start;
+    height: 5rem;
+}
+
+div.finish-container {
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: auto;
+    justify-content: center;
+    align-content: end;
+    height: 5rem;
 }
